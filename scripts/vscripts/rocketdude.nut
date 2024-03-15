@@ -101,17 +101,15 @@ function grenadeExplodeEvent( impact ){
 
 
 
-// Returns an array of players within the blast radius
+// Yields players within the blast radius
 // ----------------------------------------------------------------------------------------------------------------------------
 
 function getSurvivorsInRange(pos){
 	local player = null
 	while(player = Entities.FindByClassnameWithin(player, "player", pos, 160)){
-		if(!player.IsDead()){
-			if(!player.IsIncapacitated()){
-				yield player
-			}
-		}
+		if(player.IsDead()) continue;
+		if(player.IsIncapacitated()) continue;
+		yield player
 	}
 }
 
